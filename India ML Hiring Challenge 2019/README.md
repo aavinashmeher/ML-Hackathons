@@ -1,5 +1,5 @@
 # ML-Hackathons
-Run "WNS Analytics Wizard-Final.ipynb"
+Run "India ML Hiring Challenge EDA and modelling.ipynb"
 
 All the required packages and libraries:
 
