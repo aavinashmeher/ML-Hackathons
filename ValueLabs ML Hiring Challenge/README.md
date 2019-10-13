@@ -41,4 +41,17 @@ Developing distractors has one of the most challenging and time-consuming tasks 
 2. Text can be generated just by considering the left context of right-most word. This can be achieved by training a GPT2 model. But if we don't have long sequences of texts it is difficult to train a model that generates grammatically correct sentences.
 3. If we have a collection of potential distractors or "candidate distractors" we can choose the most similar distractors to the Question-Answer pair. The idea is to produce semantically meaningful sentence embeddings for Question-Answer pairs and the Distractors.
 
-Here, I have choosen the 2nd approach since we need grammatically correct distractors. But if the passages were provided it is possible to generate distractors that are close to the context of the passage without compromising too much on their gramatical correctness. This can be achieved by leveraging from pre-trainded wide bidirectional encoder-decoder neural network architectures such as BERT.
+Here, I have choosen the 3rd approach since we need grammatically correct distractors. But if the passages were provided it is possible to generate distractors that are close to the context of the passage without compromising too much on their gramatical correctness. This can be achieved by leveraging from pre-trainded wide bidirectional encoder-decoder neural network architectures such as BERT.
+
+<h3> Different ways of producing sentence embeddings: </h3>
+
+1. **Avg-W2V:** Words can be converted to vectors by producing their W2V embeddings. For sentences we can take average of the all the word embeddings to produce the sentence embedding. Since this is based of indivdual word embeddings this does not consider the context, POS of the words, Voice of the sentences.
+2. **Avg-W2V (Glove):** Leverages a pretrained Glove model to produce sentence embeddings. This is said to also consider the context of the words.
+3. **Sentence Transformers:** Sentence Embeddings using BERT. Tunes a model on Natural Language Inference (NLI) data. Given two sentences, the model should classify if these two sentence entail, contradict, or are neutral to each other. For this, the two sentences are passed to a transformer model to generate fixed-sized sentence embeddings. These sentence embeddings are then passed to a softmax classifier to derive the final label (entail, contradict, neutral). This generates sentence embeddings that are useful for tasks like clustering or semantic textual similarity.
+
+<h4> Constructing sentence embeddings: </h4>
+
+Choosing 'bert-base-nli-mean-tokens' and 'bert-base-nli-stsb-mean-tokens' pretrained sentence embeddings model for constructing sentence embedings/vectors.
+
+Finally, calculating the cosine distance of all the distractors from every Question-Answer pair.
+And found the closest 3 distractors from the corpus of distractors for each query sentence based on cosine similarity.
