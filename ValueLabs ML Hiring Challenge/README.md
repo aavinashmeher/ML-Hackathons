@@ -3,7 +3,7 @@
 
 MCQs are a widely question format that is used for general assessment on domain knowledge of candidates. Most of the MCQs are created as paragraphs-based questions.
 
-A paragraph or code snippet forms the base of such questions. The questions are created based on three or four options from which one option is the correct answer. The othe remaining options are called the distractors which means that these options ar eneares to the correct answer but are not correct.
+A paragraph or code snippet forms the base of such questions. The questions are created based on three or four options from which one option is the correct answer. The other remaining options are called the distractors which means that these options are nearest to the correct answer but are not correct.
 
 We are provided with training dataset of questions, answers, and distractors to build and train an **NLP** model. The **test** dataset contains questions and answers. We are required to use your NLP model to create up to **three** distractors for each question-answer combination provided in the Test data.
 
@@ -37,7 +37,8 @@ Developing distractors has one of the most challenging and time-consuming tasks 
 
 <h4> Different ways for Generating distractor: </h4>
 
-1. Can be generated from and after learning the context/concept from the passage(if provided) by training a Generative model. This can be achieved by generating texts from the passage that are close to answers but not exactly the same. But the grammar and POS of the generated text might be all messed up which is undesirable. 
-2. If we have a collection of potential distractors or "candidate distractors" we can choose the most similar distractors to the Question-Answer pair. The idea is to produce semantically meaningful sentence embeddings for Question-Answer pairs and the Distractors.
+1. Can be generated from and after learning the context/concept from the passage(if provided) by training a Generative model. This can be achieved by generating texts from the passage that are close to answers but not exactly the same. But the grammar and POS of the generated text might be all messed up which is undesirable.
+2. Text can be generated just by considering the left context of right-most word. This can be achieved by training a GPT2 model. But if we don't have long sequences of texts it is difficult to train a model that generates grammatically correct sentences.
+3. If we have a collection of potential distractors or "candidate distractors" we can choose the most similar distractors to the Question-Answer pair. The idea is to produce semantically meaningful sentence embeddings for Question-Answer pairs and the Distractors.
 
-Here, I have choosen the 2nd approach since we need grammatically correct distractors.
+Here, I have choosen the 2nd approach since we need grammatically correct distractors. But if the passages were provided it is possible to generate distractors that are close to the context of the passage without compromising too much on their gramatical correctness. This can be achieved by leveraging from pre-trainded wide bidirectional encoder-decoder neural network architectures such as BERT.
